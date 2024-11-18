@@ -24,3 +24,5 @@ services:
     command: ["-text=Hello from http-echo!"]
     ports:
       - "9090:5678" # for testing
+
+# Git test
