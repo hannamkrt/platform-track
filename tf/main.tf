@@ -1,3 +1,26 @@
+# Virtual Network
+resource "azurerm_virtual_network" "vnet" {
+  name                = "${var.resource_group_name}-vnet"
+  address_space       = ["10.0.0.0/24"]
+  location            = var.location
+  resource_group_name = azurerm_resource_group.rg.name
+}
+
+# Subnet for AKS
+resource "azurerm_subnet" "aks_subnet" {
+  name                 = "aks-subnet"
+  resource_group_name  = azurerm_resource_group.rg.name
+  virtual_network_name = azurerm_virtual_network.vnet.name
+  address_prefixes     = ["10.0.0.0/27"]
+}
+
+# Role Assignment for AKS to access the Subnet
+resource "azurerm_role_assignment" "aks_subnet_role" {
+  principal_id         = azurerm_kubernetes_cluster.aks.identity[0].principal_id
+  role_definition_name = "Network Contributor"
+  scope                = azurerm_subnet.aks_subnet.id
+}
+
 # Resource group
 resource "azurerm_resource_group" "rg" {
   name     = var.resource_group_name
@@ -19,6 +42,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     vm_size             = "Standard_A2_v2"
     type                = "VirtualMachineScaleSets"
     enable_auto_scaling = false
+    vnet_subnet_id      = azurerm_subnet.aks_subnet.id
   }
 
   identity {
@@ -27,6 +51,6 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
   network_profile {
     load_balancer_sku = "standard"
-    network_plugin    = "kubenet"
+    network_plugin    = "azure"
   }
 }

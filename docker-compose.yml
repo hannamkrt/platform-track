@@ -23,4 +23,27 @@ services:
     image: hashicorp/http-echo
     command: ["-text=Hello from http-echo!"]
     ports:
-      - "9090:5678" # for testing
+      - "9080:5678" # for testing
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    command: --config.file=/etc/prometheus/prometheus.yml
+    networks:
+      - monitoring
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
+    networks:
+      - monitoring
+
+networks:
+  monitoring:
+    external: true

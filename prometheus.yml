@@ -1,0 +1,18 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  # Prometheus
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # Wordpress
+  - job_name: 'wordpress'
+    static_configs:
+      - targets: ['localhost:8080'] 
+
+  # http-echo
+  - job_name: 'http-echo'
+    static_configs:
+      - targets: ['localhost:9080']

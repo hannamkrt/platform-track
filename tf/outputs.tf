@@ -17,3 +17,11 @@ output "cluster_name" {
 output "endpoint" {
   value = azurerm_kubernetes_cluster.aks.endpoint
 }
+
+output "vnet_id" {
+  value = azurerm_virtual_network.vnet.id
+}
+
+output "subnet_id" {
+  value = azurerm_subnet.aks_subnet.id
+}
