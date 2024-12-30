@@ -32,6 +32,7 @@ Add to hosts file:
 ```
 172.189.38.172 http-echo.platformtrack.com
 172.189.38.172 platformtrack.com
+172.189.38.172 grafana.platformtrack.com
 ```
 
 ## Prometheus & Grafana with Helm
@@ -44,6 +45,17 @@ helm install grafana grafana/grafana --namespace grafana
 
 To expose Grafana:\
 `kubectl expose svc grafana -n grafana --type=LoadBalancer --name=grafana-lb`
+
+## Horizontal Pod Autoscalers
+Install metrics-server:/
+`kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml`
+
+Commands to check metrics:/
+`kubectl top nodes`/
+`kubectl top pods --all-namespaces`
+
+Apply autoscaling to wordpress for example:
+`kubectl autoscale deployment wordpress -n wordpress --cpu-percent=60 --min=1 --max=5`
 
 ## Sources
 [Docker compose](https://docs.docker.com/compose/gettingstarted/)
