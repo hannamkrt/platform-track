@@ -47,14 +47,14 @@ To expose Grafana:\
 `kubectl expose svc grafana -n grafana --type=LoadBalancer --name=grafana-lb`
 
 ## Horizontal Pod Autoscalers
-Install metrics-server:/
+Install metrics-server:\
 `kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml`
 
-Commands to check metrics:/
-`kubectl top nodes`/
+Commands to check metrics:\
+`kubectl top nodes`\
 `kubectl top pods --all-namespaces`
 
-Apply autoscaling to wordpress for example:
+Apply autoscaling to wordpress for example:\
 `kubectl autoscale deployment wordpress -n wordpress --cpu-percent=60 --min=1 --max=5`
 
 ## Sources
