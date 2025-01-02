@@ -19,10 +19,13 @@ jobs:
         terraform_version: 1.5.7
 
     - name: Terraform Init
+      working-directory: tf
       run: terraform init
 
     - name: Terraform Plan
+      working-directory: tf
       run: terraform plan -out=tfplan
 
     - name: Terraform Apply
+      working-directory: tf
       run: terraform apply -auto-approve tfplan -lock=true
