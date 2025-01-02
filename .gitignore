@@ -1,7 +1,7 @@
 *.env
 
 # Terraform
-*.tfvars
+# *.tfvars  # uncomment if there is sensitive data
 **/.terraform/*
 *.tfstate
 *.tfstate.*
