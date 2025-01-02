@@ -16,12 +16,11 @@ jobs:
     - name: Set up Azure CLI
       uses: azure/setup-azurecli@v1
 
-    - name: Login to Azure using Service Principal
-      uses: azure/login@v1
+    - name: Authenticate to Azure
+      uses: azure/login@v2
       with:
-        client-id: ${{ secrets.AZURE_CLIENT_ID }}
-        client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
-        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        enable-AzPSSession: true
 
     - name: Get AKS credentials
       run: |

@@ -67,3 +67,7 @@ Apply autoscaling to wordpress for example:\
 [Prometheus & Grafana - guide](https://signoz.io/guides/how-to-install-prometheus-and-grafana-on-docker/)
 
 [Wordpress Kubernetes manifest - guide](https://engr-syedusmanahmad.medium.com/wordpress-on-kubernetes-cluster-step-by-step-guide-749cb53e27c7)
+
+[Azure authentication in Github Actions - example](https://github.com/Azure/login/blob/master/.github/workflows/azure-login-positive.yml)
+
+[Terraform in Github Actions - example](https://github.com/hashicorp-education/learn-terraform-github-actions/blob/main/.github/workflows/terraform.yml)
