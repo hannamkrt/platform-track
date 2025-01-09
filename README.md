@@ -46,6 +46,18 @@ helm install grafana grafana/grafana --namespace grafana
 To expose Grafana:\
 `kubectl expose svc grafana -n grafana --type=LoadBalancer --name=grafana-lb`
 
+Grafana Dashboard:\
+![GrafanaDashboard](https://github.com/user-attachments/assets/3e23691d-31bf-4074-8622-f241cace050e)
+
+Code CPU usage of Wordpress:\
+`rate(container_cpu_usage_seconds_total{container="wordpress"}[5m])`
+
+Code Memory node (Gauge 1):\
+`node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes`
+
+Code Disk space on node (Gauge 2):\
+`(node_filesystem_size_bytes{mountpoint="/"} - node_filesystem_free_bytes{mountpoint="/"})`
+
 ## Horizontal Pod Autoscalers
 Install metrics-server:\
 `kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml`
